@@ -14,7 +14,8 @@ var width, height, framerate int
 func init() {
 	flag.IntVar(&width, "width", 10, "The grid width")
 	flag.IntVar(&height, "height", 10, "The grid height")
-	flag.IntVar(&framerate, "framerate", 2, "The number of updates to perform per second")
+	flag.IntVar(&framerate, "framerate", 2,
+		"The number of updates to perform per second")
 	flag.Parse()
 }
 

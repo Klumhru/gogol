@@ -60,9 +60,11 @@ func TestRender(t *testing.T) {
 
 func TestLiveCells(t *testing.T) {
 	g := MakeGrid(5, 5)
-	assert.Equal(t, 0, g.CountLiveCells(), "Grids should start with no live cells")
+	assert.Equal(t, 0, g.CountLiveCells(),
+		"Grids should start with no live cells")
 	g.Set(0, 0, true)
-	assert.Equal(t, 1, g.CountLiveCells(), "There should be only one live cell")
+	assert.Equal(t, 1, g.CountLiveCells(),
+		"There should be only one live cell")
 }
 
 func TestIndex(t *testing.T) {
@@ -87,8 +89,12 @@ func TestLiveNeighbours(t *testing.T) {
 	g.Set(0, 0, true)
 	g.Set(1, 0, true)
 	g.Set(2, 0, true)
-	assert.Equal(t, 1, g.AliveNeighbours(0, 0), "0x0 should have one living neighbour")
-	assert.Equal(t, 2, g.AliveNeighbours(1, 0), "1x0 should have two living neighbours")
-	assert.Equal(t, 1, g.AliveNeighbours(3, 0), "2x0 should have one living neighbour")
-	assert.Equal(t, 3, g.AliveNeighbours(1, 1), "1x1 should have three living neighbours")
+	assert.Equal(t, 1, g.AliveNeighbours(0, 0),
+		"0x0 should have one living neighbour")
+	assert.Equal(t, 2, g.AliveNeighbours(1, 0),
+		"1x0 should have two living neighbours")
+	assert.Equal(t, 1, g.AliveNeighbours(3, 0),
+		"2x0 should have one living neighbour")
+	assert.Equal(t, 3, g.AliveNeighbours(1, 1),
+		"1x1 should have three living neighbours")
 }

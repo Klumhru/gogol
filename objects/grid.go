@@ -68,7 +68,9 @@ func (g *Grid) Set(x int, y int, state bool) {
 
 // Projects the status of the grid to a new grid, based on Conways GoL
 func (in *Grid) Project(out *Grid) error {
-	if len(in.Cells) != len(out.Cells) || in.Width != out.Width || in.Height != out.Height {
+	if len(in.Cells) != len(out.Cells) ||
+		in.Width != out.Width ||
+		in.Height != out.Height {
 		return errors.New("in and out grids are not identical in size")
 	}
 	var n int

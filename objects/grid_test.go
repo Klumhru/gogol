@@ -39,3 +39,35 @@ func TestProject(t *testing.T) {
 	g.Project(&b)
 	assert.Equal(t, true, g.Get(1, 1), "Cell 1x1 should be alive")
 }
+
+type OutStream struct{}
+
+var bytesWritten int
+
+func (outWrite OutStream) Write(p []byte) (n int, err error) {
+	n = len(p)
+	bytesWritten += n
+	return len(p), nil
+}
+
+func TestRender(t *testing.T) {
+	g := MakeGrid(5, 5)
+	bytesWritten = 0
+	out := OutStream{}
+	g.Render(out)
+	assert.Equal(t, 25, bytesWritten, "Incorrect write length")
+}
+
+func TestLiveCells(t *testing.T) {
+	g := MakeGrid(5, 5)
+	assert.Equal(t, 0, g.CountLiveCells(), "Grids should start with no live cells")
+	g.Set(0, 0, true)
+	assert.Equal(t, 1, g.CountLiveCells(), "There should be only one live cell")
+}
+
+func TestIndex(t *testing.T) {
+	g := MakeGrid(5, 5)
+	assert.Equal(t, 0, g.Index(0, 0), "Index of 0x0 should be 0")
+	assert.Equal(t, 4, g.Index(4, 0), "Index of 4x0 should be 4")
+	assert.Equal(t, 12, g.Index(2, 2), "Index of 2x2 should be 12")
+}

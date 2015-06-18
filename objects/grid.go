@@ -36,28 +36,35 @@ func (g *Grid) Randomize(weight float32) (err error) {
 
 // Checks if cell at specified position is alive
 func (g *Grid) Alive(x int, y int) bool {
-	return true
+	return g.Cells[g.Index(x, y)]
 }
 
 // Returns the total number of live cells in the grid
 func (g *Grid) CountLiveCells() int {
-	return 0
+	var ret int
+	for _, c := range g.Cells {
+		if c {
+			ret += 1
+		}
+	}
+	return ret
 }
 
 // Gets the life status of a cell
 func (g *Grid) Get(x int, y int) bool {
-	return false
+	return g.Cells[g.Index(x, y)]
 }
 
 // Sets the life status of a cell
-func (g *Grid) Set(x int, y int, status bool) {
+func (g *Grid) Set(x int, y int, state bool) {
+	g.Cells[g.Index(x, y)] = state
 }
 
 // Projects the status of the grid to a new grid, based on Conways GoL
 func (in *Grid) Project(out *Grid) {
-
 }
 
+// Returns the base array index of the given coords
 func (g *Grid) Index(x int, y int) int {
 	return y*g.Width + x
 }
@@ -73,4 +80,10 @@ func (g *Grid) Render(out io.Writer) {
 		}
 		out.Write([]byte(state))
 	}
+}
+
+// Traverses the 8 squares around the coordinate and returns
+// how many are living int thouse squares
+func (g *Grid) AliveNeighbours(x int, y int) int {
+	return 0
 }

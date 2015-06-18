@@ -55,7 +55,7 @@ func TestRender(t *testing.T) {
 	bytesWritten = 0
 	out := OutStream{}
 	g.Render(out)
-	assert.Equal(t, 25, bytesWritten, "Incorrect write length")
+	assert.Equal(t, 30, bytesWritten, "Incorrect write length")
 }
 
 func TestLiveCells(t *testing.T) {

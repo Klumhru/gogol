@@ -89,11 +89,14 @@ func (g *Grid) Index(x int, y int) int {
 // Renders the Grid to stdout with X meaning alive and empty string meaing dead
 func (g *Grid) Render(out io.Writer) {
 	var state string
-	for _, c := range g.Cells {
+	for i, c := range g.Cells {
 		if c {
 			state = "X"
 		} else {
 			state = " "
+		}
+		if i%g.Width == 0 {
+			out.Write([]byte("\n"))
 		}
 		out.Write([]byte(state))
 	}

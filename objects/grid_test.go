@@ -71,3 +71,14 @@ func TestIndex(t *testing.T) {
 	assert.Equal(t, 4, g.Index(4, 0), "Index of 4x0 should be 4")
 	assert.Equal(t, 12, g.Index(2, 2), "Index of 2x2 should be 12")
 }
+
+func TestLiveNeighbours(t *testing.T) {
+	g := MakeGrid(5, 5)
+	g.Set(0, 0, true)
+	g.Set(1, 0, true)
+	g.Set(2, 0, true)
+	assert.Equal(t, 1, g.AliveNeighbours(0, 0), "0x0 should have one living neighbour")
+	assert.Equal(t, 2, g.AliveNeighbours(1, 0), "1x0 should have two living neighbours")
+	assert.Equal(t, 1, g.AliveNeighbours(2, 0), "2x0 should have one living neighbour")
+	assert.Equal(t, 3, g.AliveNeighbours(1, 1), "0x1 should have three living neighbours")
+}

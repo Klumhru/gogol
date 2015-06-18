@@ -32,12 +32,12 @@ func TestGet(t *testing.T) {
 
 func TestProject(t *testing.T) {
 	g := MakeGrid(5, 5)
-	g.Cells[0] = true
-	g.Cells[1] = true
-	g.Cells[2] = true
+	g.Set(0, 0, true)
+	g.Set(1, 0, true)
+	g.Set(2, 0, true)
 	b := MakeGrid(5, 5)
 	g.Project(&b)
-	assert.Equal(t, true, g.Get(1, 1), "Cell 1x1 should be alive")
+	assert.Equal(t, true, b.Get(1, 1), "Cell 1x1 should be alive")
 }
 
 type OutStream struct{}
@@ -72,6 +72,16 @@ func TestIndex(t *testing.T) {
 	assert.Equal(t, 12, g.Index(2, 2), "Index of 2x2 should be 12")
 }
 
+func TestCoords(t *testing.T) {
+	g := MakeGrid(5, 5)
+	x, y := g.GetCoords(13)
+	assert.Equal(t, 3, x, "Index 13 should have x coords 3")
+	assert.Equal(t, 2, y, "Index 13 should have y coords 2")
+	x, y = g.GetCoords(21)
+	assert.Equal(t, 1, x, "Index 21 should have x coords 1")
+	assert.Equal(t, 4, y, "Index 21 should have y coords 4")
+}
+
 func TestLiveNeighbours(t *testing.T) {
 	g := MakeGrid(5, 5)
 	g.Set(0, 0, true)
@@ -79,6 +89,6 @@ func TestLiveNeighbours(t *testing.T) {
 	g.Set(2, 0, true)
 	assert.Equal(t, 1, g.AliveNeighbours(0, 0), "0x0 should have one living neighbour")
 	assert.Equal(t, 2, g.AliveNeighbours(1, 0), "1x0 should have two living neighbours")
-	assert.Equal(t, 1, g.AliveNeighbours(2, 0), "2x0 should have one living neighbour")
-	assert.Equal(t, 3, g.AliveNeighbours(1, 1), "0x1 should have three living neighbours")
+	assert.Equal(t, 1, g.AliveNeighbours(3, 0), "2x0 should have one living neighbour")
+	assert.Equal(t, 3, g.AliveNeighbours(1, 1), "1x1 should have three living neighbours")
 }
